@@ -23,7 +23,8 @@ def get_news(word):
                                           'description': article['description'],
                                           'content': re.sub(r'\[.*\]', '', article['content']),
                                           'urlToImage': article['urlToImage'],
-                                          'author': article['author']})
+                                          'author': article['author'],
+                                          'url': article['url']})
 
 
 @app.route('/', methods=['GET', 'POST'])
