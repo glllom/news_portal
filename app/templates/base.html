@@ -18,27 +18,27 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <sidebar class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
+            <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
                 <section class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse sticky-top w-100 m-0 p-0">
                     <header class="navbar navbar-primary w-100 m-0 p-0">
                         <a class="navbar-brand col-md-3 col-lg-2" href="#">Good News</a>
                     </header>
-                    <img src="static/img/widgets_templates/currency.png" alt="" class="w-100 my-4">
-                    <img src="static/img/widgets_templates/finance.png" alt="" class="w-100 my-4">
-                    <img src="static/img/widgets_templates/covid.png" alt="" class="w-100 my-4">
+                    <img src="static/widgets_templates/currency.png" alt="" class="w-100 my-4">
+                    <img src="static/widgets_templates/finance.png" alt="" class="w-100 my-4">
+                    <img src="static/widgets_templates/covid.png" alt="" class="w-100 my-4">
                 </section>
-            </sidebar>
+            </div>
             <main class="col-md-6 ms-sm-auto col-lg-8 px-md-4">
                 <header class="navbar navbar-primary sticky-top text-danger p-0 m-0">
                     <h5 class="breaking-news mx-5 p-3 m-0">{{ data_dict['breaking_news_long_string'] }}</h5>
-                    <form class="d-flex bg-light w-100 p-2">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Specify news">
+                    <form action="" method="post" class="d-flex bg-light w-100 p-2">
+                        <input name="search_word" class="form-control me-2" type="search" placeholder="Search" aria-label="Specify news">
                         <button class="btn btn-outline-success text-nowrap" type="submit">Specify news</button>
                     </form>
                 </header>
                 {% block news_container %}{% endblock %}
             </main>
-            <sidebar class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
+            <div class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
                 <section class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse sticky-top w-100 m-0 p-0">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row">
                         {% if current_user %}
@@ -56,11 +56,11 @@
                         </li>
                         {% endif %}
                     </ul>
-                    <img src="../static/img/widgets_templates/TranslationThumb.webp" alt="" class="w-100 my-4">
-                    <img src="../static/img/widgets_templates/screen.png" alt="" class="w-100 my-4">
-                    <img src="../static/img/widgets_templates/calendar.png" alt="" class="w-100 my-4">
+                    <img src="static/widgets_templates/TranslationThumb.webp" alt="" class="w-100 my-4">
+                    <img src="static/widgets_templates/screen.png" alt="" class="w-100 my-4">
+                    <img src="static/widgets_templates/calendar.png" alt="" class="w-100 my-4">
                 </section>
-            </sidebar>
+            </div>
         </div>
     </div>
     {#    Sign Up Form#}
