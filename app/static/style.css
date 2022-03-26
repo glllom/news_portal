@@ -128,3 +128,18 @@ h6+p{
 .form-signin .close-button:hover {
   color: #003893;
 }
+
+
+/**************************404 page not found************************/
+.page_404 { 
+    margin-top: 10vh;
+    margin-left: 10vw;
+}
+
+
+.four_zero_four_bg{
+ 
+    background-image: url(https://i.gifer.com/7yrz.gif);
+    height: 400px;
+    background-position: center;
+}
