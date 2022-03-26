@@ -11,4 +11,4 @@ def refresh_all(word=''):
     form = RegistrationForm()
     if form.validate_on_submit():
         return redirect(url_for('refresh_all'))
-    return render_template('index.html', data_dict=data_dict, form=form, current_user=current_user)
+    return render_template('index.html', data_dict=data_dict, form=form)
