@@ -1,6 +1,9 @@
 """ ---------------------NEWS API------------------------------- """
 import re
 from newsapi import NewsApiClient
+from app import user_data
+
+from app.models import User_data
 
 newsapi = NewsApiClient(api_key='cb21ebc4040344cfa657a8490189aa29')
 # all data dictionary
@@ -24,9 +27,10 @@ def get_news(word):
 """ ------------------------WEATHER API---------------------------- """                                         
 import json
 import requests
-my_key = 'c0779d2b68b69ef6b733d5629c17506f'
-l = 'londo'
-uResponse = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={l}&appid=c0779d2b68b69ef6b733d5629c17506f")
-
-Jresponse = uResponse.text
-data = json.loads(Jresponse)
+def find_city_id(user_location):
+    my_key = 'c0779d2b68b69ef6b733d5629c17506f'
+    l = user_location
+    uResponse = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={l}&appid={my_key}")
+    Jresponse = uResponse.text
+    data = json.loads(Jresponse)
+    return data['id']
