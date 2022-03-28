@@ -1,9 +1,12 @@
 from flask import flash, redirect, render_template, request, url_for
 from app import app, db
+
 from app.api import data_dict, find_city_id, get_news
 from app.forms import RegistrationForm, LoginForm
+
 from app.models import User_data
 from flask_login import LoginManager, login_user, login_required, logout_user
+
 
 
 login_manager = LoginManager()
@@ -68,3 +71,4 @@ def signup(word=''):
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
