@@ -1,6 +1,13 @@
 """ ---------------------NEWS API------------------------------- """
 import re
-import requests
+
+from newsapi import NewsApiClient
+from app import user_data
+
+from app.models import User_data
+
+
+
 
 # all data dictionary
 data_dict = {'breaking_news_long_string': '', 'articles': []}
@@ -51,4 +58,15 @@ def get_headlines():
 # data = json.loads(Jresponse)
 
 
+
+""" ------------------------WEATHER API---------------------------- """                                         
+import json
+import requests
+def find_city_id(user_location):
+    my_key = 'c0779d2b68b69ef6b733d5629c17506f'
+    l = user_location
+    uResponse = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={l}&appid={my_key}")
+    Jresponse = uResponse.text
+    data = json.loads(Jresponse)
+    return data['id']
 
