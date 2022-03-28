@@ -1,10 +1,9 @@
 from __future__ import unicode_literals
 
 from app import db
-from flask_login import UserMixin
 
 
-class UserData(UserMixin, db.Model):
+class UserData(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname = db.Column(db.String(20))
     lastname = db.Column(db.String(20))

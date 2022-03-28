@@ -2,8 +2,8 @@
 {% block title %}Signup{% endblock %}
 {% block content %}
 
-<form class="form-signup" method="POST">
-    <h2 class="form-signup-heading">Please fill all of the fileds to sign up</h2>
+<form class="form-signup" method="POST" novalidate>
+    <h2 class="form-signup-heading py-1">Please fill all the fields to sign up</h2>
     {{ form.hidden_tag() }}
     <div class="row">
         <div class="col">
@@ -34,10 +34,16 @@
     <div class="col">
         {{ form.language(class="form-control", id="password", placeholder="Language") }}
     </div>
+        {% for field in form.errors %}
+        {%  for error in form.errors[field] %}
+            <p class="text-danger">{{ error }}</p>
+        {% endfor %}
+        {% endfor %}
     <br>
     <div class="col-12">
         {{ form.submit(class="btn btn-dark") }}
     </div>
+
     {% for message in get_flashed_messages() %}
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>{{ message }}</strong>
