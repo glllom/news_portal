@@ -1,0 +1,128 @@
+/*animation instruction*/
+@keyframes text {
+    0% {
+        transform: translate(20%, 0);
+    }
+    /*
+        50%{
+          transform: translate(-160%, 0);
+        }
+         */
+    100% {
+        transform: translate(-100%, 0);
+    }
+}
+/*Variables*/
+:root {
+    --header-color-1: rgb(11, 11, 100);
+}
+/*-----*/
+body {
+    background-color: whitesmoke;
+}
+
+h1{
+    color: white;
+    text-align: center
+}
+
+header {
+    position: relative;
+}
+
+/***********************HEADER*********************/
+.header {
+    display: inline;
+    margin-left: auto;
+    margin-right: 15%; 
+    
+}
+
+.search-news {
+    margin-right: 2px; 
+    width: 240px;
+}
+
+/*Main Block*/
+main > header {
+    position: absolute;
+    overflow: hidden;
+    background-image: linear-gradient(rgb(27, 21, 69), rgb(13, 9, 46));
+}
+
+.breaking-news {
+    padding-top: 35px;
+    animation: text 45s infinite linear;
+    padding-left: 100%;
+    white-space: pre;
+    background-image: linear-gradient(rgb(27, 21, 69), rgb(13, 9, 46));
+
+}
+.sidebar, .navbar{
+    z-index: 0;
+}
+/*News container*/
+a, a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+h6{
+    font-style: italic;
+}
+
+h6+p{
+    font-size: larger;
+}
+.news-block{
+    display: flex;
+    margin: 10px;
+    height: 300px;
+    background-color: lightgray;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    transition: transform 0.15s linear;
+}
+
+.news-block:hover{
+    transform: translateX(-5px) translateY(-5px);
+}
+.news-block>img{
+    max-width: 25%;
+    max-height: 200px;
+}
+
+/********************** Login Form + Sign Up Form **********************/
+form {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+
+.form-login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+
+/**************************404 page not found************************/
+.page_404 { 
+    margin-top: 10vh;
+    margin-left: 10vw;
+}
+
+
+.four_zero_four_bg{
+ 
+    background-image: url(https://i.gifer.com/7yrz.gif);
+    height: 400px;
+    background-position: center;
+}
+
+/*************widgets***************/
+#openweathermap-widget-22 {
+    margin-top: 50px;
+}

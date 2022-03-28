@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="navbar-nav">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    <div class="header">
+        <a href="{{ url_for('index') }}">
+            <h1>The "GO" NEWS</h1>
+        </a>
+    </div>
+    <form class="d-flex bg-dark search-news">
+        <input class="form-control me-2" type="search" placeholder="Search news" aria-label="Specify news">
+        <button class="btn btn-outline-light text-nowrap" type="submit">Search</button>
+    </form>
+</nav>
+{% endblock %}
+{% block content %}
+{{ super() }}
+{% block leftsidebar %}
+<sidebar class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
+    <!-- WEATHER WIDGET -->
+    <br>
+    <div id="openweathermap-widget-22"></div>
+    <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = []; window.myWidgetParam.push({ id: 22, cityid: '{{ weather }}', appid: 'c0779d2b68b69ef6b733d5629c17506f', units: 'metric', containerid: 'openweathermap-widget-22', }); (function () { var script = document.createElement('script'); script.async = true; script.charset = "utf-8"; script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js"; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s); })();</script>
+
+</sidebar>
+{% endblock %}
+{% block news_container %}
+{% for article in data_dict['articles'] %}
+<a href="{{ article.url }}">
+    <div class="news-block">
+        <div>
+            <h3>{{ article.title }}</h3>
+            <h6>{{ article.description }}</h6>
+            <p>{{ article.content }}</p>
+            <p>{{ article.author }}</p>
+        </div>
+        <img src="{{ article.urlToImage }}">
+    </div>
+</a>
+{% endfor %}
+{% endblock %}
+
+{% block rightsidebar %}
+<sidebar class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
+
+</sidebar>
+{% endblock %}
+
+{% endblock %}
