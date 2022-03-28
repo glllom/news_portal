@@ -23,18 +23,13 @@ body {
 
 h1{
     color: white;
-    text-align: center
-}
-
-header {
-    position: relative;
 }
 
 /***********************HEADER*********************/
 .header {
     display: inline;
     margin-left: auto;
-    margin-right: 15%; 
+    margin-right: auto;
     
 }
 
@@ -44,7 +39,7 @@ header {
 }
 
 /*Main Block*/
-main > header {
+header {
     position: absolute;
     overflow: hidden;
     background-image: linear-gradient(rgb(27, 21, 69), rgb(13, 9, 46));

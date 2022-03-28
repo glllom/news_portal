@@ -1,13 +1,9 @@
 """ ---------------------NEWS API------------------------------- """
 import re
-
+import json
+import requests
 from newsapi import NewsApiClient
 from app import user_data
-
-from app.models import User_data
-
-
-
 
 # all data dictionary
 data_dict = {'breaking_news_long_string': '', 'articles': []}
@@ -15,6 +11,7 @@ data_dict = {'breaking_news_long_string': '', 'articles': []}
 
 def get_news(word=None):
     data_dict['breaking_news_long_string'] = get_headlines()
+
     if word == '' or word is None:
         url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=1090ddedde734dbd979190fd2b5f0745"
     else:
@@ -45,23 +42,11 @@ def get_headlines():
             break
     return headline
 
-#
-#
-# """ ------------------------WEATHER API---------------------------- """
-# import json
-# import requests
-# my_key = 'c0779d2b68b69ef6b733d5629c17506f'
-# l = 'londo'
-# uResponse = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={l}&appid=c0779d2b68b69ef6b733d5629c17506f")
-#
-# Jresponse = uResponse.text
-# data = json.loads(Jresponse)
 
 
+"""" ------------------------WEATHER API---------------------------- """
 
-""" ------------------------WEATHER API---------------------------- """                                         
-import json
-import requests
+
 def find_city_id(user_location):
     my_key = 'c0779d2b68b69ef6b733d5629c17506f'
     l = user_location
@@ -69,4 +54,3 @@ def find_city_id(user_location):
     Jresponse = uResponse.text
     data = json.loads(Jresponse)
     return data['id']
-
