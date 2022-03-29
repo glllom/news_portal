@@ -10,8 +10,8 @@
             <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
             window.myWidgetParam.push({
                 id: 15,
-                {% if logged_user %}
-                    cityid: {{ logged_user.location }},
+                {% if logged_user and weather_city_id%}
+                    cityid: {{ weather_city_id }},
                 {% else %}
                     cityid: '293396',
                 {% endif %}
