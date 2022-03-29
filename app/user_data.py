@@ -10,9 +10,8 @@ def add_user(firstname, lastname, email, location, language, password):
 
 
 def check_user(email):
-    return UserData.query.filter_by(email=email)
+    return UserData.query.filter_by(email=email).first()
 
 
-def check_password(username, password):
-    pass
-
+def check_password(email, password):
+    return password == UserData.query.filter_by(email=email).first().password

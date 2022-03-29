@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 <body>
 {% block content %}
     {{ super() }}
@@ -24,7 +23,6 @@
                 let s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(script, s);
             })();</script>
-
         </sidebar>
     {% endblock %}
     {% block news_container %}
@@ -37,18 +35,14 @@
                         <p>{{ article.content }}</p>
                         <p>{{ article.author }}</p>
                     </div>
-                    <img src="{{ article.urlToImage }}">
+                    <img src="{{ article.urlToImage }}" alt="">
                 </div>
             </a>
         {% endfor %}
     {% endblock %}
-
     {% block rightsidebar %}
         <sidebar class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
-
         </sidebar>
     {% endblock %}
-
-
 {% endblock %}
 </body>

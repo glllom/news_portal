@@ -3,8 +3,8 @@ import re
 import json
 import requests
 from newsapi import NewsApiClient
-from app import user_data
 
+newsapi = NewsApiClient(api_key='1090ddedde734dbd979190fd2b5f0745')
 # all data dictionary
 data_dict = {'breaking_news_long_string': '', 'articles': []}
 
@@ -13,11 +13,12 @@ def get_news(word=None):
     data_dict['breaking_news_long_string'] = get_headlines()
 
     if word == '' or word is None:
-        url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=1090ddedde734dbd979190fd2b5f0745"
+        response = newsapi.get_top_headlines(language='en', sources='bbc-news')
     else:
-        url = f"https://newsapi.org/v2/everything?q={word}&apiKey=1090ddedde734dbd979190fd2b5f0745"
-
-    response = requests.get(url).json()
+        response = newsapi.get_everything(q=word, sources='bbc-news,the-verge',
+                                          language='en',
+                                          sort_by='relevancy',
+                                          page=1)
     if response["totalResults"] <= 0:
         return get_news()
     pattern = r'\[.*\]'
@@ -33,15 +34,13 @@ def get_news(word=None):
 
 
 def get_headlines():
-    url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=1090ddedde734dbd979190fd2b5f0745'
-    top_headlines = requests.get(url).json()
+    top_headlines = newsapi.get_top_headlines(language='en', sources='bbc-news')
     headline = ""
     for index, source in enumerate(top_headlines['articles']):
         headline += '\t\tBREAKING NEWS!\t' + source['title']
         if index >= 6:
             break
     return headline
-
 
 
 """" ------------------------WEATHER API---------------------------- """

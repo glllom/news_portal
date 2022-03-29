@@ -1,28 +1,19 @@
 from flask import flash, redirect, render_template, request, url_for, g
-from app import app, db
+from app import app
 
 from app.api import data_dict, find_city_id, get_news
 from app.forms import RegistrationForm, LoginForm
 
-from app.models import UserData
-from app.user_data import add_user, check_user
-# from flask_login import LoginManager, login_user, login_required, logout_user
-#
-# login_manager = LoginManager()
-# login_manager.init_app(app)
-# login_manager.login_view = 'login'
-
-
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return UserData.query.get(int(user_id))
+from app.user_data import add_user, check_user, check_password
+logged_user = None
 
 
 @app.route('/')
 @app.route('/<word>')
 def index(word=''):
+    login_form = LoginForm()
     get_news(word)
-    return render_template('index.html', data_dict=data_dict)
+    return render_template('index.html', data_dict=data_dict, login_form=login_form, logged_user=logged_user)
 
 
 @app.route('/specified', methods=['post'])
@@ -31,19 +22,22 @@ def specified_news():
     return redirect(url_for("index", word=word))
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = UserData.query.filter_by(email=form.email.data).first()
-        city = find_city_id(user.location)
-        if user:
-            if user.password == form.password.data:
-                # login_user(user, remember=form.remember.data)
-                return redirect(url_for('personalized_news', city_id=city))
+    global logged_user
+    login_form = LoginForm()
+    if login_form.validate_on_submit():
+        email = login_form.email.data
+        password = login_form.password.data
+        if user := check_user(email):
+            if check_password(email, password):
+                logged_user = user
+                return redirect(url_for('index'))
             else:
-                flash('Invalid username or password')
-    return render_template('login.html', form=form)
+                flash("password incorrect")
+        else:
+            flash("email incorrect")
+    return redirect(url_for('index')+"#login-popup")
 
 
 @app.route('/personalized_news/<city_id>')
@@ -57,7 +51,7 @@ def personalized_news(city_id, word=''):
 def signup():
     form = RegistrationForm()
     if form.validate_on_submit():
-        if check_user(form.email.data):
+        if not check_user(form.email.data):
             add_user(form.firstname.data,
                      form.lastname.data,
                      form.email.data,
@@ -72,7 +66,7 @@ def signup():
 
 
 @app.route('/logout')
-# @login_required
 def logout():
-    # logout_user()
+    global logged_user
+    logged_user = None
     return redirect(url_for('index'))
