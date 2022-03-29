@@ -3,13 +3,13 @@ from app import app
 
 from app.api import data_dict, get_news, find_city_id
 from app.forms import RegistrationForm, LoginForm, UpdateInfo
-from app.user_data import add_user, check_user, check_password, set_word, get_word, delete_user
+from app.user_data import add_user, check_user, check_password, set_word, get_word, update_user
 
 logged_user = None
 
 
 @app.route('/')
-@app.route('/<word>')
+@app.route('/search<word>')
 def index(word=''):
     login_form = LoginForm()
     get_news(word)
@@ -73,17 +73,13 @@ def signup():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    if logged_user:
-        form = UpdateInfo()
-        if form.validate_on_submit():
-            add_user(form.firstname.data,
-                     form.lastname.data,
-                     form.country.data,
-                     form.city.data,
-                     form.language.data,
-                     form.password.data)
-            flash("User updated successfully.")
-            return redirect(url_for('logout'))
+    form = UpdateInfo()
+    if form.validate_on_submit():
+        update_user(logged_user, form.firstname.data,
+                    form.lastname.data, form.country.data,
+                    form.city.data, form.language.data)
+        flash("User updated successfully.")
+        return redirect(url_for('index'))
     return render_template('dashboard.html', form=form, user=logged_user)
 
 

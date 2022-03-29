@@ -14,6 +14,26 @@ class UserData(db.Model):
     language = db.Column(db.String(50))
     last_search = db.Column(db.String(50))
 
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+        db.session.commit()
+
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+        db.session.commit()
+
+    def set_country(self, country):
+        self.country = country
+        db.session.commit()
+
+    def set_city(self, city):
+        self.city = city
+        db.session.commit()
+
+    def set_language(self, language):
+        self.language = language
+        db.session.commit()
+
     def set_search_word(self, word):
         self.last_search = word
         db.session.commit()

@@ -25,7 +25,11 @@ def set_word(user, word):
 def get_word(user):
     return UserData.query.get(user.user_id).get_search_word()
 
-def delete_user(email):
-    to_delete = UserData.query.filter_by(email=email).first()
-    db.session.delete(to_delete)
-    db.session.commit()
+
+def update_user(user, firstname, lastname, country, city, language):
+    user = UserData.query.get(user.user_id)
+    user.set_firstname(firstname)
+    user.set_lastname(lastname)
+    user.set_country(country)
+    user.set_city(city)
+    user.set_language(language)
