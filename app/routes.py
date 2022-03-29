@@ -76,15 +76,16 @@ def dashboard():
         if form.validate_on_submit():
             delete_user(logged_user.email)
             add_user(form.firstname.data,
-                    form.lastname.data,
-                    form.email.data,
-                    form.country.data,
-                    form.city.data,
-                    form.language.data,
-                    form.password.data)
+                     form.lastname.data,
+                     form.email.data,
+                     form.country.data,
+                     form.city.data,
+                     form.language.data,
+                     form.password.data)
             flash("User updated successfully.")
             return redirect(url_for('logout'))
     return render_template('dashboard.html', form=form, user=logged_user)
+
 
 @app.route('/logout')
 def logout():

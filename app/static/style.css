@@ -47,7 +47,10 @@ header {
     overflow: hidden;
     background-image: linear-gradient(rgb(27, 21, 69), rgb(13, 9, 46));
 }
-
+ .main-news{
+     margin-left: 300px;
+     max-width: 70%;
+ }
 .breaking-news {
     padding-top: 35px;
     animation: text 45s infinite linear;
@@ -57,11 +60,11 @@ header {
 
 }
 
-.sidebar, .navbar {
+.left-sidebar, .navbar {
     z-index: 0;
 }
 
-/*News container*/
+/*************** News container *******************/
 a, a:hover {
     text-decoration: none;
     color: black;
@@ -94,6 +97,13 @@ h6 + p {
 .news-block > img {
     max-width: 25%;
     max-height: 200px;
+}
+
+/********************** sidebars & widgets **********************/
+.left-sidebar{
+    position: fixed;
+    left: 20px;
+    top: 150px;
 }
 
 /********************** Login Form + Sign Up Form **********************/
@@ -186,8 +196,30 @@ form {
     transform: scale(1.2, 1.2);
 }
 
+
 /****************dashboard********************/
 .dashboard {
     margin-left: 150px;
     margin-right: 150px;
 }
+
+
+/**************************404 page not found************************/
+.page_404 {
+    margin-top: 10vh;
+    margin-left: 10vw;
+}
+
+
+.four_zero_four_bg {
+
+    background-image: url(https://i.gifer.com/7yrz.gif);
+    height: 400px;
+    background-position: center;
+}
+
+/*************widgets***************/
+#openweathermap-widget-22 {
+    margin-top: 50px;
+}
+

@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Signup{% endblock %}
-{% block loginlink %}
-{% endblock %}
-{% block content %}
-{% block breakingnews %}
-{% endblock %}
+
+{% block news_container %}
+{% block breakingnews %}{% endblock %}
 
 <form class="form-signup" method="POST" novalidate>
-    <h2 class="form-signup-heading py-1">Please fill all the fields to sign up</h2>
+    <h2 class="form-signup-heading py-3">Please fill all the fields to sign up</h2>
     {{ form.hidden_tag() }}
     <div class="row">
         <div class="col">

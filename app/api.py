@@ -23,13 +23,15 @@ def get_news(word=None):
         return get_news()
     pattern = r'\[.*\]'
     data_dict['articles'] = []
-    for article in response['articles']:
+    for index, article in enumerate(response['articles']):
         data_dict['articles'].append({'title': article['title'],
                                       'description': article['description'],
                                       'content': re.sub(pattern, ' ', str(article['content'])),
                                       'urlToImage': article['urlToImage'],
                                       'author': article['author'],
                                       'url': article['url']})
+        if index >= 10:
+            break
     return data_dict
 
 
