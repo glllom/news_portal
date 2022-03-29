@@ -53,13 +53,14 @@
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
-        <div class="row">
+        <div class="">
             {% block leftsidebar %}
-                <sidebar class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse ">
+                <sidebar class="sidebar">
 
                 </sidebar>
             {% endblock %}
-            <main class="col-md-6 ms-sm-auto col-lg-8 px-md-1">
+            <div class="col-md-3 col-lg-2 d-md-block collapse"></div>
+            <main class="main-news">
 
                 {% block news_container %}{% endblock %}
             </main>
