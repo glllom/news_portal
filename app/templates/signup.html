@@ -1,62 +1,62 @@
 {% extends "base.html" %}
 {% block title %}Signup{% endblock %}
 
-{% block news_container %}
 {% block breakingnews %}{% endblock %}
+{% block loginlink %}{% endblock %}
+{% block news_container %}
+    <form class="form-signup" method="POST" novalidate>
+        <h2 class="form-signup-heading py-3">Please fill all the fields to sign up</h2>
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col">
+                {{ form.firstname(class="form-control", id="email", placeholder="Firstname") }}
+            </div>
+            <div class="col">
+                {{ form.lastname(class="form-control", id="password", placeholder="Lastname") }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                {{ form.password(class="form-control", id="password", placeholder="Password") }}
+            </div>
+            <div class="col">
+                {{ form.confirm_password(class="form-control", id="password", placeholder="Confirm password") }}
+            </div>
+        </div>
+        <br>
+        <div class="col">
+            {{ form.email(class="form-control", id="password", placeholder="Email") }}
+        </div>
+        <br>
+        <div class="col">
+            {{ form.country(class="form-control", id="password", placeholder="Country") }}
+        </div>
+        <br>
+        <div class="col">
+            {{ form.city(class="form-control", id="password", placeholder="City") }}
+        </div>
+        <br>
+        <div class="col">
+            {{ form.language(class="form-control", id="password", placeholder="Language") }}
+        </div>
+        {% for field in form.errors %}
+            {% for error in form.errors[field] %}
+                <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        <br>
+        <div class="col-12">
+            {{ form.submit(class="btn btn-dark") }}
+        </div>
 
-<form class="form-signup" method="POST" novalidate>
-    <h2 class="form-signup-heading py-3">Please fill all the fields to sign up</h2>
-    {{ form.hidden_tag() }}
-    <div class="row">
-        <div class="col">
-            {{ form.firstname(class="form-control", id="email", placeholder="Firstname") }}
-        </div>
-        <div class="col">
-            {{ form.lastname(class="form-control", id="password", placeholder="Lastname") }}
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            {{ form.password(class="form-control", id="password", placeholder="Password") }}
-        </div>
-        <div class="col">
-            {{ form.confirm_password(class="form-control", id="password", placeholder="Confirm password") }}
-        </div>
-    </div>
-    <br>
-    <div class="col">
-        {{ form.email(class="form-control", id="password", placeholder="Email") }}
-    </div>
-    <br>
-    <div class="col">
-        {{ form.country(class="form-control", id="password", placeholder="Country") }}
-    </div>
-    <br>
-    <div class="col">
-        {{ form.city(class="form-control", id="password", placeholder="City") }}
-    </div>
-    <br>
-    <div class="col">
-        {{ form.language(class="form-control", id="password", placeholder="Language") }}
-    </div>
-    {% for field in form.errors %}
-    {%  for error in form.errors[field] %}
-    <p class="text-danger">{{ error }}</p>
-    {% endfor %}
-    {% endfor %}
-    <br>
-    <div class="col-12">
-        {{ form.submit(class="btn btn-dark") }}
-    </div>
-
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{{ message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %}
-</form>
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </form>
 {% endblock %}
-{% block login%}
+{% block login %}
 {% endblock %}
