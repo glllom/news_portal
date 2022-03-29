@@ -2,8 +2,8 @@ from flask import flash, redirect, render_template, request, url_for
 from app import app
 
 from app.api import data_dict, get_news, find_city_id
-from app.forms import RegistrationForm, LoginForm
-from app.user_data import add_user, check_user, check_password, set_word, get_word
+from app.forms import RegistrationForm, LoginForm, Update_info
+from app.user_data import add_user, check_user, check_password, set_word, get_word, delete_user
 
 logged_user = None
 
@@ -15,7 +15,7 @@ def index(word=''):
     get_news(word)
     if logged_user:
         try:
-            weather_city_id = find_city_id(logged_user.location)
+            weather_city_id = find_city_id(logged_user.city, logged_user.country)
         except AttributeError:
             weather_city_id = None
     else:
@@ -58,15 +58,33 @@ def signup():
             add_user(form.firstname.data,
                      form.lastname.data,
                      form.email.data,
-                     form.location.data,
+                     form.country.data,
+                     form.city.data,
                      form.language.data,
                      form.password.data)
             flash("User created successfully.")
             return redirect(url_for('index'))
         else:
             flash("User with this email already exists.")
-    return render_template('signup.html', form=form, data_dict=data_dict)
+    return render_template('signup.html', form=form)
 
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    if logged_user:
+        form = Update_info()
+        if form.validate_on_submit():
+            delete_user(logged_user.email)
+            add_user(form.firstname.data,
+                    form.lastname.data,
+                    form.email.data,
+                    form.country.data,
+                    form.city.data,
+                    form.language.data,
+                    form.password.data)
+            flash("User updated successfully.")
+            return redirect(url_for('logout'))
+    return render_template('dashboard.html', form=form, user=logged_user)
 
 @app.route('/logout')
 def logout():

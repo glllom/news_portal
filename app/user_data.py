@@ -2,9 +2,9 @@ from app import db
 from app.models import UserData
 
 
-def add_user(firstname, lastname, email, location, language, password):
+def add_user(firstname, lastname, email, country, city, language, password):
     new_user = UserData(firstname=firstname, lastname=lastname,
-                        email=email, location=location, language=language, password=password)
+                        email=email, country=country, city=city, language=language, password=password)
 
     db.session.add(new_user)
     db.session.commit()
@@ -24,3 +24,8 @@ def set_word(user, word):
 
 def get_word(user):
     return UserData.query.get(user.user_id).get_search_word()
+
+def delete_user(email):
+    to_delete = UserData.query.filter_by(email=email).first()
+    db.session.delete(to_delete)
+    db.session.commit()

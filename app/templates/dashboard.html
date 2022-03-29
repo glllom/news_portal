@@ -3,11 +3,26 @@
 {% block loginlink %}
 {% endblock %}
 {% block content %}
+{% block signup %}
+{% endblock %}
 {% block breakingnews %}
 {% endblock %}
 
+<div class="dashboard">
+    <h2>Dashboard</h2>
+
+    <h6>Name : {{ user.firstname|capitalize }}</h6>
+    <h6>Last Name : {{ user.lastname }}</h6>
+    <h6>Password : {{ user.password | length * 'x' }}</h6>
+    <h6>Country : {{ user.country|capitalize }}</h6>
+    <h6>City : {{ user.city|capitalize }}</h6>
+    <h6>Language : {{ user.language|capitalize }}</h6>
+
+</div>
+
 <form class="form-signup" method="POST" novalidate>
-    <h2 class="form-signup-heading py-1">Please fill all the fields to sign up</h2>
+    <h4 class="form-signup-heading py-1">Please complete all of the fields bellow and click submit to
+        update your profile:</h4>
     {{ form.hidden_tag() }}
     <div class="row">
         <div class="col">
@@ -48,16 +63,11 @@
     {% endfor %}
     {% endfor %}
     <br>
+    <p style="color: red;">ON SUBMIT YOU WILL BE LOGGED OUT!</p>
+    <p style="color: red;">PLEASE LOG IN AGAIN WITH YOUR NEW CREDENTIALS.</p>
     <div class="col-12">
         {{ form.submit(class="btn btn-dark") }}
     </div>
-
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{{ message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %}
 </form>
 {% endblock %}
 {% block login%}

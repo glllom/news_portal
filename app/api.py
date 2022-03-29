@@ -4,7 +4,7 @@ import json
 import requests
 from newsapi import NewsApiClient
 
-newsapi = NewsApiClient(api_key='1090ddedde734dbd979190fd2b5f0745')
+newsapi = NewsApiClient(api_key='cb21ebc4040344cfa657a8490189aa29')
 # all data dictionary
 data_dict = {'breaking_news_long_string': '', 'articles': []}
 
@@ -46,10 +46,18 @@ def get_headlines():
 """" ------------------------WEATHER API---------------------------- """
 
 
-def find_city_id(user_location):
+def find_country_code(user_country):
+    uResponse = requests.get(f"https://restcountries.com/v3.1/name/{user_country}")
+    Jresponse = uResponse.text
+    data = json.loads(Jresponse)
+    return data[0]['cca2']
+
+
+def find_city_id(user_city, user_country):
     my_key = 'c0779d2b68b69ef6b733d5629c17506f'
-    l = user_location
-    uResponse = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={l}&appid={my_key}")
+    city = user_city 
+    country = find_country_code(user_country)
+    uResponse = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city},{country}&appid={my_key}")
     Jresponse = uResponse.text
     data = json.loads(Jresponse)
     return data['id']
