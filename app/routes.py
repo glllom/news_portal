@@ -1,10 +1,10 @@
-from flask import flash, redirect, render_template, request, url_for, g
+from flask import flash, redirect, render_template, request, url_for
 from app import app
 
-from app.api import data_dict, find_city_id, get_news
+from app.api import data_dict, get_news, find_city_id
 from app.forms import RegistrationForm, LoginForm
-
-from app.user_data import add_user, check_user, check_password
+from app.models import UserData
+from app.user_data import add_user, check_user, check_password, set_word, get_word
 logged_user = None
 
 
@@ -19,6 +19,8 @@ def index(word=''):
 @app.route('/specified', methods=['post'])
 def specified_news():
     word = request.form.get("search_word")
+    if logged_user:
+        set_word(logged_user, word)
     return redirect(url_for("index", word=word))
 
 
@@ -32,19 +34,14 @@ def login():
         if user := check_user(email):
             if check_password(email, password):
                 logged_user = user
-                return redirect(url_for('index'))
+                last_search = get_word(logged_user)
+                print(logged_user.location)
+                return redirect(url_for('index', word=last_search))
             else:
                 flash("password incorrect")
         else:
             flash("email incorrect")
     return redirect(url_for('index')+"#login-popup")
-
-
-@app.route('/personalized_news/<city_id>')
-# @login_required
-def personalized_news(city_id, word=''):
-    get_news(word)
-    return render_template('personalized_news.html', data_dict=data_dict, weather=city_id)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -55,7 +52,7 @@ def signup():
             add_user(form.firstname.data,
                      form.lastname.data,
                      form.email.data,
-                     form.location.data,
+                     find_city_id(form.location.data),
                      form.language.data,
                      form.password.data)
             flash("User created successfully.")

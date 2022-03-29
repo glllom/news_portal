@@ -12,3 +12,10 @@ class UserData(db.Model):
     location = db.Column(db.String(50))
     language = db.Column(db.String(50))
     last_search = db.Column(db.String(50))
+
+    def set_search_word(self, word):
+        self.last_search = word
+        db.session.commit()
+
+    def get_search_word(self):
+        return self.last_search

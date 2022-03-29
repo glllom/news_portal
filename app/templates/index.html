@@ -10,7 +10,12 @@
             <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
             window.myWidgetParam.push({
                 id: 15,
-                cityid: '293396',
+                {% if logged_user %}
+                    cityid: {{ logged_user.location }},
+                {% else %}
+                    cityid: '293396',
+                {% endif %}
+
                 appid: 'c0779d2b68b69ef6b733d5629c17506f',
                 units: 'metric',
                 containerid: 'openweathermap-widget-15',
