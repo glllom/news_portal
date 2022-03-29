@@ -1,74 +1,50 @@
 {% extends "base.html" %}
-{% block title %}Signup{% endblock %}
-{% block loginlink %}
-{% endblock %}
-{% block content %}
-{% block signup %}
-{% endblock %}
-{% block breakingnews %}
-{% endblock %}
+{% block title %}User settings{% endblock %}
+{% block loginlink %}{% endblock %}
+{% block breakingnews %}{% endblock %}
+{% block news_container %}
 
-<div class="dashboard">
-    <h2>Dashboard</h2>
 
-    <h6>Name : {{ user.firstname|capitalize }}</h6>
-    <h6>Last Name : {{ user.lastname }}</h6>
-    <h6>Password : {{ user.password | length * 'x' }}</h6>
-    <h6>Country : {{ user.country|capitalize }}</h6>
-    <h6>City : {{ user.city|capitalize }}</h6>
-    <h6>Language : {{ user.language|capitalize }}</h6>
-
-</div>
-
-<form class="form-signup" method="POST" novalidate>
-    <h4 class="form-signup-heading py-1">Please complete all of the fields bellow and click submit to
-        update your profile:</h4>
-    {{ form.hidden_tag() }}
-    <div class="row">
+    <form class="form-signup" method="POST" novalidate>
+        <h4 class="form-signup-heading py-3">Please complete all the fields bellow and click submit to
+            update your profile:</h4>
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col">
+                {{ form.firstname(class="form-control", id="email", value=user.firstname|capitalize) }}
+            </div>
         <div class="col">
-            {{ form.firstname(class="form-control", id="email", placeholder="Firstname") }}
-        </div>
-        <div class="col">
-            {{ form.lastname(class="form-control", id="password", placeholder="Lastname") }}
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col">
-            {{ form.password(class="form-control", id="password", placeholder="Password") }}
-        </div>
-        <div class="col">
-            {{ form.confirm_password(class="form-control", id="password", placeholder="Confirm password") }}
+            {{ form.lastname(class="form-control", value=user.lastname|capitalize) }}
         </div>
     </div>
     <br>
     <div class="col">
-        {{ form.email(class="form-control", id="password", placeholder="Email") }}
+        {{ form.country(class="form-control", value=user.country|capitalize) }}
     </div>
-    <br>
-    <div class="col">
-        {{ form.country(class="form-control", id="password", placeholder="Country") }}
-    </div>
-    <br>
-    <div class="col">
-        {{ form.city(class="form-control", id="password", placeholder="City") }}
-    </div>
-    <br>
-    <div class="col">
-        {{ form.language(class="form-control", id="password", placeholder="Language") }}
-    </div>
-    {% for field in form.errors %}
-    {%  for error in form.errors[field] %}
-    <p class="text-danger">{{ error }}</p>
-    {% endfor %}
-    {% endfor %}
-    <br>
-    <p style="color: red;">ON SUBMIT YOU WILL BE LOGGED OUT!</p>
-    <p style="color: red;">PLEASE LOG IN AGAIN WITH YOUR NEW CREDENTIALS.</p>
-    <div class="col-12">
-        {{ form.submit(class="btn btn-dark") }}
-    </div>
-</form>
+        <br>
+        <div class="col">
+            {{ form.city(class="form-control", value=user.city|capitalize) }}
+        </div>
+        <br>
+        <div class="col">
+            {{ form.language(class="form-control", value=user.language) }}
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                {{ form.password(class="form-control", id="password", placeholder="Password") }}
+            </div>
+        </div>
+        {% for field in form.errors %}
+            {% for error in form.errors[field] %}
+                <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        <br>
+        <div class="col-12">
+            {{ form.submit(class="btn btn-dark") }}
+        </div>
+    </form>
 {% endblock %}
 {% block login%}
 {% endblock %}

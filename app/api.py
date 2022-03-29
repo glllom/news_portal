@@ -49,19 +49,26 @@ def get_headlines():
 
 
 def find_country_code(user_country):
-    uResponse = requests.get(f"https://restcountries.com/v3.1/name/{user_country}")
-    Jresponse = uResponse.text
-    data = json.loads(Jresponse)
-    return data[0]['cca2']
+    response = requests.get(f"https://restcountries.com/v3.1/name/{user_country}")
+    if response.status_code == 404:
+        print("unknown country")
+        return "IL"
+    try:
+        return response.json()[0]['cca2']
+    except KeyError:
+        return "IL"
 
 
-def find_city_id(user_city, user_country):
+def find_city_id(city, user_country):
     my_key = 'c0779d2b68b69ef6b733d5629c17506f'
-    city = user_city 
     country = find_country_code(user_country)
-    uResponse = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city},{country}&appid={my_key}")
-    Jresponse = uResponse.text
-    data = json.loads(Jresponse)
-    return data['id']
+    response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city},{country}&appid={my_key}")
+    if response.status_code == 404:
+        return 281184  # Jerusalem
+    try:
+        return response.json()['id']
+    except KeyError:
+        print("unknown city")
+        return 281184  # Jerusalem
 
-
+# print(find_city_id("Bat yam", "israel"))

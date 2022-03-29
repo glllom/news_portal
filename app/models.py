@@ -20,3 +20,9 @@ class UserData(db.Model):
 
     def get_search_word(self):
         return self.last_search
+
+    def get_city(self):
+        return self.city
+
+    def get_country(self):
+        return self.country

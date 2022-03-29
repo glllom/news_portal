@@ -1325,37 +1325,50 @@
       <DataType>text|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="484" parent="475" name="id">
+    <column id="484" parent="475" name="user_id">
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
     <column id="485" parent="475" name="firstname">
-      <DataType>VARCHAR(50)|0s</DataType>
+      <DataType>VARCHAR(20)|0s</DataType>
       <Position>2</Position>
     </column>
     <column id="486" parent="475" name="lastname">
-      <DataType>VARCHAR(50)|0s</DataType>
+      <DataType>VARCHAR(20)|0s</DataType>
       <Position>3</Position>
     </column>
     <column id="487" parent="475" name="email">
-      <DataType>VARCHAR(50)|0s</DataType>
+      <DataType>VARCHAR(35)|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="488" parent="475" name="location">
-      <DataType>VARCHAR(50)|0s</DataType>
+    <column id="488" parent="475" name="password">
+      <DataType>VARCHAR(16)|0s</DataType>
       <Position>5</Position>
     </column>
     <column id="489" parent="475" name="language">
       <DataType>VARCHAR(50)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="490" parent="475" name="password">
+    <column id="490" parent="475" name="last_search">
       <DataType>VARCHAR(50)|0s</DataType>
       <Position>7</Position>
     </column>
-    <key id="491" parent="475">
-      <ColNames>id</ColNames>
+    <column id="491" parent="475" name="country">
+      <DataType>VARCHAR(50)|0s</DataType>
+      <Position>8</Position>
+    </column>
+    <column id="492" parent="475" name="city">
+      <DataType>VARCHAR(50)|0s</DataType>
+      <Position>9</Position>
+    </column>
+    <index id="493" parent="475" name="ix_user_data_email">
+      <ColNames>email</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="494" parent="475">
+      <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
   </database-model>

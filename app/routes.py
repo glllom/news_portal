@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, request, url_for
 from app import app
 
 from app.api import data_dict, get_news, find_city_id
-from app.forms import RegistrationForm, LoginForm, Update_info
+from app.forms import RegistrationForm, LoginForm, UpdateInfo
 from app.user_data import add_user, check_user, check_password, set_word, get_word, delete_user
 
 logged_user = None
@@ -15,8 +15,10 @@ def index(word=''):
     get_news(word)
     if logged_user:
         try:
-            weather_city_id = find_city_id(logged_user.city, logged_user.country)
+            weather_city_id = find_city_id(logged_user.__dict__['city'], logged_user.__dict__['country'])
+            print(logged_user.__dict__['city'])
         except AttributeError:
+            print("error")
             weather_city_id = None
     else:
         weather_city_id = None
@@ -72,12 +74,10 @@ def signup():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     if logged_user:
-        form = Update_info()
+        form = UpdateInfo()
         if form.validate_on_submit():
-            delete_user(logged_user.email)
             add_user(form.firstname.data,
                      form.lastname.data,
-                     form.email.data,
                      form.country.data,
                      form.city.data,
                      form.language.data,

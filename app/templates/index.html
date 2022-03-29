@@ -30,3 +30,24 @@
         </div>
     {% endblock %}
 {% endblock %}
+{% block js %}
+    <script>!window.myWidgetParam ? window.myWidgetParam = [] : window.myWidgetParam;
+    window.myWidgetParam.push({
+        id: 12,
+        {% if logged_user and weather_city_id %}
+            cityid: '{{ weather_city_id }}',
+        {% else %}
+            cityid: '293396',
+        {% endif %}
+        appid: 'c0779d2b68b69ef6b733d5629c17506f', units: 'metric', containerid: 'openweathermap-widget-12',
+    });
+    (function () {
+        let script = document.createElement('script');
+        script.async = true;
+        script.charset = "utf-8";
+        script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+        let s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(script, s);
+    })();</script>
+
+{% endblock %}
