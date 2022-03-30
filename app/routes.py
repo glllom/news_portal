@@ -1,3 +1,4 @@
+import json
 from flask import flash, redirect, render_template, request, url_for
 from app import app
 
@@ -25,6 +26,20 @@ def index(word=''):
     return render_template('index.html', data_dict=data_dict, login_form=login_form,
                            logged_user=logged_user, weather_city_id=weather_city_id)
 
+
+@app.route('/stocks')
+@app.route('/stocks/<stock>')
+def stocks(stock=''):
+    with open('stocks_list.json', 'r') as f:
+        all_stocks = json.load(f)
+    return render_template("stocks.html", stocks=all_stocks, user_stock=stock)
+    
+
+@app.route('/stock_search', methods=['post'])
+def stock_search():
+    stock = request.form.get("search_stock")
+    print(stock.split(':')[0])
+    return redirect(url_for("stocks", stock=stock))
 
 @app.route('/specified', methods=['post'])
 def specified_news():

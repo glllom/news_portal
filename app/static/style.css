@@ -140,6 +140,23 @@ form {
     
 }
 
+/***********stocks************/
+
+.stocks-center {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+#stocks-search-header {
+    text-align: center;
+}
+
+.stock-finder {
+    width: 300px;
+    flex-direction: column
+}
+
 /*************Login menu*************/
 #login-popup {
     position: fixed;
