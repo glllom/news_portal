@@ -3,6 +3,7 @@ from flask import flash, redirect, render_template, request, url_for
 from app import app
 
 from app.api import data_dict, get_news, find_city_id
+from app.covid import get_covid_stat
 from app.forms import RegistrationForm, LoginForm, UpdateInfo
 from app.user_data import add_user, check_user, check_password, set_word, get_word, update_user
 
@@ -15,16 +16,16 @@ def index(word=''):
     login_form = LoginForm()
     get_news(word)
     if logged_user:
+        covid_stat = get_covid_stat(logged_user.__dict__['country'])
         try:
             weather_city_id = find_city_id(logged_user.__dict__['city'], logged_user.__dict__['country'])
-            print(logged_user.__dict__['city'])
         except AttributeError:
-            print("error")
             weather_city_id = None
     else:
         weather_city_id = None
-    return render_template('index.html', data_dict=data_dict, login_form=login_form,
-                           logged_user=logged_user, weather_city_id=weather_city_id)
+        covid_stat = get_covid_stat("Israel")
+    return render_template('index.html', data_dict=data_dict, login_form=login_form, logged_user=logged_user,
+                           weather_city_id=weather_city_id, covid_stat=covid_stat)
 
 
 @app.route('/stocks')

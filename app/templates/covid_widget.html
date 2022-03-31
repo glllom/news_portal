@@ -1,4 +1,4 @@
-<div class="covid-widget bg-dark">
+<div class="covid-widget ">
     <div class="d-flex justify-content-end">
         <div class="image-section">
             <div class="covid-image-container">
@@ -9,16 +9,36 @@
         <div class="header-section">
             <h5 class="text-light pt-3 pb-0 mx-3 text-end">Covid-19</h5>
             <h5 class="text-light pt-1 pb-2 mx-3 text-end">in <span
-                    class="text-decoration-underline">Israel</span></h5>
+                    class="text-decoration-underline">{{ covid_stat.country_name }}</span></h5>
         </div>
     </div>
-    <div class="stat bg-white">
-        <p>dsafsdfsdf</p>
-        <p>dsafsdfsdf</p>
-        <p>dsafsdfsdf</p>
-        <p>dsafsdfsdf</p>
-        <p>dsafsdfsdf</p>
-        <p>dsafsdfsdf</p>
+    <div class="stat bg-white px-1 pt-4">
+        <table>
+            <tr>
+                <td>Total cases:</td>
+                <td class="text-end">
+                {{ covid_stat.cases }}</tr>
+            <tr>
+                <td>Total deaths:</td>
+                <td class="text-end">
+                {{ covid_stat.deaths }}</tr>
+            <tr>
+                <td>Total recovered:</td>
+                <td class="text-end">
+                {{ covid_stat.total_recovered }}</tr>
+            <tr>
+                <td>New cases:</td>
+                <td class="text-end">
+                {{ covid_stat.new_cases }}</tr>
+            <tr>
+                <td>Active cases:</td>
+                <td class="text-end">
+                {{ covid_stat.active_cases }}</tr>
+            <tr>
+                <td>Total tests:</td>
+                <td class="text-end">
+                {{ covid_stat.total_tests }}</tr>
+        </table>
     </div>
-    <div class="bg-dark footer"></div>
+    <div class=" footer"></div>
 </div>

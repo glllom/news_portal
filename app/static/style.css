@@ -279,6 +279,10 @@ form {
 }
 
 .covid-widget .footer {
-    height: 15px;
+    height: 20px;
     border-radius: 5px;
+}
+
+.covid-widget, .covid-widget .footer {
+    background-color: #153a02;
 }
