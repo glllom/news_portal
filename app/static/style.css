@@ -240,3 +240,45 @@ form {
     margin-top: 50px;
 }
 
+.covid-widget {
+    position: relative;
+    margin-left: 5px;
+    margin-top: 35px;
+    width: 225px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.375);
+}
+
+.image-section {
+    width: 50px;
+}
+
+.covid-image-container {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 90px;
+    height: 90px;
+    z-index: 10;
+}
+
+.stat {
+    position: relative;
+}
+
+.covid-widget .stat::before {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 80%;
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    background-color: red;
+
+}
+
+.covid-widget .footer {
+    height: 15px;
+    border-radius: 5px;
+}

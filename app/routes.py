@@ -10,7 +10,7 @@ logged_user = None
 
 
 @app.route('/')
-@app.route('/search<word>')
+@app.route('/search/<word>')
 def index(word=''):
     login_form = LoginForm()
     get_news(word)
@@ -40,6 +40,7 @@ def stock_search():
     stock = request.form.get("search_stock")
     print(stock.split(':')[0])
     return redirect(url_for("stocks", stock=stock))
+
 
 @app.route('/specified', methods=['post'])
 def specified_news():
