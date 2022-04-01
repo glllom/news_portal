@@ -106,6 +106,12 @@ h6 + p {
     top: 150px;
 }
 
+.right-sidebar {
+        position: fixed;
+        right: 20px;
+        top: 150px;
+}
+
 /********************** Login Form + Sign Up Form **********************/
 form {
     margin-left: 150px;
@@ -157,6 +163,41 @@ form {
     flex-direction: column
 }
 
+.stocks-list-center {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_stocks {
+    font-size: 20px;
+}
+
+.delete-stock {
+    background: none;
+    border: none;
+    color: red;
+}
+
+.deleted-list {
+    display: flex;
+    align-items: center;
+    border: 1px solid grey;
+}
+
+.green-arrow {
+    color: green;
+}
+
+.red-arrow {
+    color: red;
+}
+
+.stocks-widget {
+    font-size: 10px;
+    width: 200px;
+}
 /*************Login menu*************/
 #login-popup {
     position: fixed;
