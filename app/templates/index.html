@@ -1,36 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% block leftsidebar %}
-        <div class="left-sidebar">
-            <!-- WEATHER WIDGET -->
-            <div id="openweathermap-widget-12"></div>
+    <div class="left-widgets">
+        <!-- WEATHER WIDGET -->
+        <div id="openweathermap-widget-12"></div>
+        <a href="{{ url_for('football') }}">{% include "football_widget.html" %}</a>
+    </div>
+    <div class="right-widgets">
         {% include "covid_widget.html" %}
-        </div>
-
-    {% endblock %}
-
-    {% block news_container %}
+        {#  include stocks here  #}
+    </div>
+    <div class="content d-flex justify-content-between">
+        <div class="left-sidebar"></div>
         <main class="main-news">
-        {% for article in data_dict['articles'] %}
-            <a href="{{ article.url }}">
-                <div class="news-block">
-                    <div>
-                        <h3>{{ article.title }}</h3>
-                        <h6>{{ article.description }}</h6>
-                        <p>{{ article.content }}</p>
-                        <p>{{ article.author }}</p>
+            {% for article in data_dict['articles'] %}
+                <a href="{{ article.url }}">
+                    <div class="news-block">
+                        <div>
+                            <h3>{{ article.title }}</h3>
+                            <h6>{{ article.description }}</h6>
+                            <p>{{ article.content }}</p>
+                            <p>{{ article.author }}</p>
+                        </div>
+                        <img src="{{ article.urlToImage }}" alt="">
                     </div>
-                    <img src="{{ article.urlToImage }}" alt="">
-                </div>
-            </a>
-        {% endfor %}
+                </a>
+            {% endfor %}
         </main>
-    {% endblock %}
-    {% block rightsidebar %}
         <div class="right-sidebar">
         </div>
-    {% endblock %}
+    </div>
 {% endblock %}
 {% block js %}
     <script>!window.myWidgetParam ? window.myWidgetParam = [] : window.myWidgetParam;

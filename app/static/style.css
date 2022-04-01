@@ -3,11 +3,6 @@
     0% {
         transform: translate(20%, 0);
     }
-    /*
-        50%{
-          transform: translate(-160%, 0);
-        }
-         */
     100% {
         transform: translate(-100%, 0);
     }
@@ -18,9 +13,14 @@
     --header-color-1: rgb(11, 11, 100);
 }
 
-/*-----*/
+/*------------------------------------------*/
 body {
     background-color: whitesmoke;
+}
+
+/***********************HEADER*********************/
+.navbar {
+    min-width: 800px;
 }
 
 h1 {
@@ -28,43 +28,61 @@ h1 {
     color: white;
 }
 
-/***********************HEADER*********************/
 .header {
     display: inline;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 .search-news {
     margin-right: 2px;
     width: 240px;
 }
-
-/*Main Block*/
 header {
     position: absolute;
     overflow: hidden;
     background-image: linear-gradient(rgb(27, 21, 69), rgb(13, 9, 46));
+    min-width: 800px;
 }
- .main-news{
-     margin-left: 300px;
-     max-width: 70%;
- }
+
 .breaking-news {
     padding-top: 35px;
     animation: text 45s infinite linear;
     padding-left: 100%;
     white-space: pre;
     background-image: linear-gradient(rgb(27, 21, 69), rgb(13, 9, 46));
-
 }
 
-.left-sidebar, .navbar {
-    z-index: 0;
+/***************** Block Content***********************/
+.content {
+    position: relative;
+}
+
+.left-widgets, .right-widgets, .navbar {
+    z-index: 10;
+}
+
+.left-sidebar, .right-sidebar {
+    width: 440px;
+}
+
+/*response*/
+@media (max-width: 1400px) {
+    .main-news {
+        max-width: 100%;
+    }
+
+    .left-sidebar, .right-sidebar, .left-widgets, .right-widgets {
+        display: none;
+    }
+
 }
 
 /*************** News container *******************/
+.main-news {
+    display: block;
+}
+
 a, a:hover {
     text-decoration: none;
     color: black;
@@ -82,6 +100,7 @@ h6 + p {
     display: flex;
     margin: 10px;
     height: 300px;
+    min-width: 800px;
     background-color: lightgray;
     padding: 5px;
     border: 1px solid lightgray;
@@ -95,15 +114,124 @@ h6 + p {
 }
 
 .news-block > img {
-    max-width: 25%;
-    max-height: 200px;
+    max-width: 35%;
+    object-fit: cover;
+    max-height: 100%;
 }
 
-/********************** sidebars & widgets **********************/
-.left-sidebar{
+/********************** widgets **********************/
+.left-widgets, .right-widgets {
+    width: 300px;
     position: fixed;
+    top: 140px;
+}
+
+.left-widgets {
+    left: 10px;
+}
+
+.right-widgets {
+    right: 10px;
+}
+
+/****** weather *******/
+#openweathermap-widget-22 {
+    margin-top: 50px;
+}
+
+/****** covid ********/
+.covid-widget {
+    width: 240px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.375);
+    margin-left: auto;
+    position: relative;
+}
+
+.image-section {
+    width: 50px;
+}
+
+.covid-image-container {
+    position: absolute;
+    top: 30px;
     left: 20px;
-    top: 150px;
+    width: 90px;
+    height: 90px;
+    z-index: 10;
+}
+
+.stat {
+    position: relative;
+}
+
+.covid-widget .stat::before {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 80%;
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    background-color: red;
+}
+
+.covid-widget .footer {
+    height: 20px;
+    border-radius: 5px;
+}
+
+.covid-widget, .covid-widget .footer {
+    background-color: #153a02;
+}
+
+/***** football *******/
+
+.football-widget {
+    position: relative;
+    margin-left: 5px;
+    margin-top: 60px;
+    width: 225px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.375);
+
+}
+
+.football-widget, .football-widget .footer {
+    background-color: #224c86;
+}
+
+.football-widget .stat::before {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 80%;
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    background-color: red;
+}
+
+.football-widget .footer {
+    height: 20px;
+    border-radius: 5px;
+}
+
+.teams {
+    font-size: small;
+}
+
+th {
+    border-bottom: 2px solid black;
+    background-image: linear-gradient(whitesmoke, whitesmoke, dodgerblue);
+}
+
+.football-wallpaper-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 90vh;
+    width: 50vw;
 }
 
 /********************** Login Form + Sign Up Form **********************/
@@ -120,42 +248,6 @@ form {
     width: 30%;
 }
 
-/**************************404 page not found************************/
-.page_404 {
-    margin-top: 10vh;
-    margin-left: 10vw;
-}
-
-
-.four_zero_four_bg {
-
-    background-image: url(https://i.gifer.com/7yrz.gif);
-    height: 400px;
-    background-position: center;
-}
-
-/*************widgets***************/
-#openweathermap-widget-22 {
-    margin-top: 50px;
-    
-}
-
-/***********stocks************/
-
-.stocks-center {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-}
-
-#stocks-search-header {
-    text-align: center;
-}
-
-.stock-finder {
-    width: 300px;
-    flex-direction: column
-}
 
 /*************Login menu*************/
 #login-popup {
@@ -171,13 +263,13 @@ form {
     transition: opacity 500ms;
     visibility: hidden;
     opacity: 0;
-    z-index: 2;
+    z-index: 10;
 }
 
 #login-popup:target {
     visibility: visible;
     opacity: 1;
-    z-index: 2;
+    z-index: 10;
 }
 
 .close-popup {
@@ -220,6 +312,22 @@ form {
     margin-right: 150px;
 }
 
+/***********stocks************/
+
+.stocks-center {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+#stocks-search-header {
+    text-align: center;
+}
+
+.stock-finder {
+    width: 300px;
+    flex-direction: column
+}
 
 /**************************404 page not found************************/
 .page_404 {
@@ -235,54 +343,5 @@ form {
     background-position: center;
 }
 
-/*************widgets***************/
-#openweathermap-widget-22 {
-    margin-top: 50px;
-}
 
-.covid-widget {
-    position: relative;
-    margin-left: 5px;
-    margin-top: 35px;
-    width: 225px;
-    border-radius: 5px;
-    box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.375);
-}
 
-.image-section {
-    width: 50px;
-}
-
-.covid-image-container {
-    position: absolute;
-    top: 30px;
-    left: 20px;
-    width: 90px;
-    height: 90px;
-    z-index: 10;
-}
-
-.stat {
-    position: relative;
-}
-
-.covid-widget .stat::before {
-    display: block;
-    content: "";
-    height: 2px;
-    width: 80%;
-    position: absolute;
-    top: -2px;
-    left: 10%;
-    background-color: red;
-
-}
-
-.covid-widget .footer {
-    height: 20px;
-    border-radius: 5px;
-}
-
-.covid-widget, .covid-widget .footer {
-    background-color: #153a02;
-}

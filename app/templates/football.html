@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Football{% endblock %}
+
+{% block breakingnews %}{% endblock %}
+{% block loginlink %}{% endblock %}
+{% block content %}
+    <h1 class="text-start text-dark fs-1 mt-2">Matches for the next three days</h1>
+    <table class="w-50">
+        {% for league in football_fixtures if (league['fixtures']|length)>0 %}
+            <thead>
+            <tr>
+                <th colspan="3" class="fs-4 fw-bold pt-5"><img class="mx-1 " src="{{ league.league_logo }}" alt=""#}
+                                                               width="50px"> {{ league.league }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for fixture in league['fixtures'] %}
+                <tr>
+                    <td class="fs-4 text-end pt-3"><img class="float-end mx-3" src="{{ fixture["team_1_logo"] }}" alt=""
+                                                        width="40px">{{ fixture["team_1"] }}</td>
+                    <td class="fw-bold fs-3 text-center">:</td>
+                    <td class="fs-4 px-3 pt-3"><img class="float-start me-3" src="{{ fixture["team_2_logo"] }}" alt=""
+                                                    width="30px">{{ fixture["team_2"] }}</td>
+                </tr>
+                <tr>
+                    <td class="fst-italic fs-3">{{ fixture['venue'] }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold fs-3">{{ fixture['city'] }}</td>
+                    <td colspan=3 class="my-3 text-primary fs-4">{{ fixture["date"] }}</td>
+                </tr>
+                <td colspan="3" class="pb-4">
+                    _______________________________________________________________________________________________________
+                </td>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="football-wallpaper-container">
+        <img class="img-fluid football-wallpaper" src="{{ url_for('static', filename='football_wallpaper.jpg') }}"
+             alt="">
+    </div>
+{% endblock %}
+
+{% block login %}
+{% endblock %}

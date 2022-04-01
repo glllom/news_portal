@@ -4,19 +4,23 @@ from app import app
 
 from app.api import data_dict, get_news, find_city_id
 from app.covid import get_covid_stat
+from app.football import get_all_fixtures, get_main_games
 from app.forms import RegistrationForm, LoginForm, UpdateInfo
 from app.user_data import add_user, check_user, check_password, set_word, get_word, update_user
 
 logged_user = None
+football_fixtures = None  # It is global for decrease requests to API, because free key is limited requests
 
 
 @app.route('/')
 @app.route('/search/<word>')
 def index(word=''):
+    global football_fixtures
     login_form = LoginForm()
     get_news(word)
     if logged_user:
         covid_stat = get_covid_stat(logged_user.__dict__['country'])
+        football_fixtures = get_all_fixtures(logged_user.__dict__['country'])
         try:
             weather_city_id = find_city_id(logged_user.__dict__['city'], logged_user.__dict__['country'])
         except AttributeError:
@@ -24,8 +28,10 @@ def index(word=''):
     else:
         weather_city_id = None
         covid_stat = get_covid_stat("Israel")
+        football_fixtures = get_all_fixtures("Israel")
+    main_games = get_main_games(football_fixtures)
     return render_template('index.html', data_dict=data_dict, login_form=login_form, logged_user=logged_user,
-                           weather_city_id=weather_city_id, covid_stat=covid_stat)
+                           weather_city_id=weather_city_id, covid_stat=covid_stat, football_fixtures=main_games)
 
 
 @app.route('/stocks')
@@ -105,3 +111,8 @@ def logout():
     global logged_user
     logged_user = None
     return redirect(url_for('index'))
+
+
+@app.route('/football')
+def football():
+    return render_template('football.html', football_fixtures=football_fixtures)

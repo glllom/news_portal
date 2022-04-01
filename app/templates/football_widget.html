@@ -1,0 +1,38 @@
+<div class="football-widget">
+    <div class="d-flex justify-content-end">
+        <div class="image-section">
+            <div class="covid-image-container">
+                <img class="img-fluid" src="{{ url_for('static', filename='widgets_templates/football_icon.png') }}"
+                     alt="">
+            </div>
+        </div>
+        <div class="header-section">
+            <h5 class="text-light pt-3 pb-0 mx-3 text-end">Football</h5>
+            <h5 class="text-light pt-1 pb-2 mx-3 text-end">in <span
+                    class="text-decoration-underline">{{ covid_stat.country_name }}</span></h5>
+        </div>
+    </div>
+    <div class="stat bg-white px-1 pt-4">
+        <table>
+            {% for fixture in football_fixtures %}
+                <tr>
+                    <td colspan=3 class="text-center fw-bold">{{ fixture["date"] }}</td>
+                </tr>
+                <tr>
+                    <td class="px-3"><img class="float-end" src="{{ fixture["team_1_logo"] }}" alt=""
+                                          width="30px"></td>
+                    <td class="fw-bold fs-3 text-center">:</td>
+                    <td class="px-3"><img class="float-start" src="{{ fixture["team_2_logo"] }}" alt=""
+                                          width="30px"></td>
+                </tr>
+                <tr>
+                    <td class="text-center teams">{{ fixture["team_1"] }}</td>
+                    <td></td>
+                    <td class="text-center teams">{{ fixture["team_2"] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="footer"></div>
+</div>
+
