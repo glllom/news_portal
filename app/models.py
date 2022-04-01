@@ -1,10 +1,8 @@
-from __future__ import unicode_literals
-
 from app import db
 
 
 class UserData(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     firstname = db.Column(db.String(20))
     lastname = db.Column(db.String(20))
     email = db.Column(db.String(35), unique=True, index=True)
@@ -13,6 +11,7 @@ class UserData(db.Model):
     city = db.Column(db.String(50))
     language = db.Column(db.String(50))
     last_search = db.Column(db.String(50))
+    userstocks = db.relationship('User_Stocks', backref='user_data', lazy='dynamic')
 
     def set_firstname(self, firstname):
         self.firstname = firstname
@@ -46,3 +45,16 @@ class UserData(db.Model):
 
     def get_country(self):
         return self.country
+
+class User_Stocks(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    stock_symbol = db.Column(db.String(25))
+    stock_name = db.Column(db.String(25))
+    opening = db.Column(db.Float)
+    high = db.Column(db.Float)
+    low = db.Column(db.Float)
+    previous_close = db.Column(db.Float)
+    closing = db.Column(db.Float)
+    change = db.Column(db.Float)
+    perc = db.Column(db.String(15))
+    user_id = db.Column(db.Integer, db.ForeignKey('user_data.id'))

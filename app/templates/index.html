@@ -1,46 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="left-widgets">
-        <!-- WEATHER WIDGET -->
-        <div id="openweathermap-widget-12"></div>
-        <a href="{{ url_for('football') }}">{% include "football_widget.html" %}</a>
-    </div>
-    <div class="right-widgets">
-        {% include "covid_widget.html" %}
-        {#  include stocks here  #}
-    </div>
-    <div class="content d-flex justify-content-between">
-        <div class="left-sidebar"></div>
-        <main class="main-news">
-            {% for article in data_dict['articles'] %}
-                <a href="{{ article.url }}">
-                    <div class="news-block">
-                        <div>
-                            <h3>{{ article.title }}</h3>
-                            <h6>{{ article.description }}</h6>
-                            <p>{{ article.content }}</p>
-                            <p>{{ article.author }}</p>
-                        </div>
-                        <img src="{{ article.urlToImage }}" alt="">
-                    </div>
-                </a>
-            {% endfor %}
-        </main>
-        <div class="right-sidebar">
+{% block leftsidebar %}
+<div class="left-sidebar">
+    <!-- WEATHER WIDGET -->
+    <div id="openweathermap-widget-12"></div>
+</div>
+
+{% endblock %}
+
+{% block news_container %}
+<main class="main-news">
+    {% for article in data_dict['articles'] %}
+    <a href="{{ article.url }}">
+        <div class="news-block">
+            <div>
+                <h3>{{ article.title }}</h3>
+                <h6>{{ article.description }}</h6>
+                <p>{{ article.content }}</p>
+                <p>{{ article.author }}</p>
+            </div>
+            <img src="{{ article.urlToImage }}" alt="">
         </div>
-    </div>
+    </a>
+    {% endfor %}
+</main>
+{% endblock %}
+{% block rightsidebar %}
+
+{% endblock %}
 {% endblock %}
 {% block js %}
-    <script>!window.myWidgetParam ? window.myWidgetParam = [] : window.myWidgetParam;
+<script>!window.myWidgetParam ? window.myWidgetParam = [] : window.myWidgetParam;
     window.myWidgetParam.push({
         id: 12,
         {% if logged_user and weather_city_id %}
-            cityid: '{{ weather_city_id }}',
+    cityid: '{{ weather_city_id }}',
         {% else %}
-            cityid: '293396',
+    cityid: '293396',
         {% endif %}
-        appid: 'c0779d2b68b69ef6b733d5629c17506f', units: 'metric', containerid: 'openweathermap-widget-12',
+    appid: 'c0779d2b68b69ef6b733d5629c17506f', units: 'metric', containerid: 'openweathermap-widget-12',
     });
     (function () {
         let script = document.createElement('script');

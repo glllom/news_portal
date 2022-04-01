@@ -1,5 +1,5 @@
 from app import db
-from app.models import UserData
+from app.models import User_Stocks, UserData
 
 
 def add_user(firstname, lastname, email, country, city, language, password):
@@ -23,7 +23,7 @@ def set_word(user, word):
 
 
 def get_word(user):
-    return UserData.query.get(user.user_id).get_search_word()
+    return UserData.query.get(user.id).get_search_word()
 
 
 def update_user(user, firstname, lastname, country, city, language):
@@ -33,3 +33,19 @@ def update_user(user, firstname, lastname, country, city, language):
     user.set_country(country)
     user.set_city(city)
     user.set_language(language)
+
+
+""" -------------------------------USER STOCKS------------------------------- """
+def add_stock(stock_symbol, stock_name, opening, high, low, previous_close, closing, change, perc, user_id):
+    
+    new_stock = User_Stocks(stock_symbol=stock_symbol, stock_name=stock_name, opening=opening, high=high, low=low, previous_close=previous_close, closing=closing, change=change, perc=perc, user_id=user_id)
+    
+    db.session.add(new_stock)
+    db.session.commit()
+
+def remove_stock(stock):
+    db.session.delete(stock)
+    db.session.commit()
+
+def user_stocks(user_id):
+    return db.session.query(User_Stocks).filter(User_Stocks.user_id == user_id)
