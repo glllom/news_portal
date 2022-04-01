@@ -1,5 +1,6 @@
 """ ---------------------NEWS API------------------------------- """
 import re
+import json
 import requests
 from newsapi import NewsApiClient
 

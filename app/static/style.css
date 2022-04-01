@@ -3,6 +3,7 @@
     0% {
         transform: translate(20%, 0);
     }
+
     100% {
         transform: translate(-100%, 0);
     }
@@ -36,8 +37,9 @@ h1 {
 
 .search-news {
     margin-right: 2px;
-    width: 240px;
+    width: 245px;
 }
+
 header {
     position: absolute;
     overflow: hidden;
@@ -58,12 +60,15 @@ header {
     position: relative;
 }
 
-.left-widgets, .right-widgets, .navbar {
+.left-widgets,
+.right-widgets,
+.navbar {
     z-index: 10;
 }
 
-.left-sidebar, .right-sidebar {
-    width: 440px;
+.left-sidebar,
+.right-sidebar {
+    width: 45%;
 }
 
 /*response*/
@@ -72,7 +77,10 @@ header {
         max-width: 100%;
     }
 
-    .left-sidebar, .right-sidebar, .left-widgets, .right-widgets {
+    .left-sidebar,
+    .right-sidebar,
+    .left-widgets,
+    .right-widgets {
         display: none;
     }
 
@@ -83,7 +91,8 @@ header {
     display: block;
 }
 
-a, a:hover {
+a,
+a:hover {
     text-decoration: none;
     color: black;
 }
@@ -92,7 +101,7 @@ h6 {
     font-style: italic;
 }
 
-h6 + p {
+h6+p {
     font-size: larger;
 }
 
@@ -113,31 +122,82 @@ h6 + p {
     transform: translateX(-5px) translateY(-5px);
 }
 
-.news-block > img {
+.news-block>img {
     max-width: 35%;
     object-fit: cover;
     max-height: 100%;
 }
 
 /********************** widgets **********************/
-.left-widgets, .right-widgets {
+.left-widgets,
+.right-widgets {
     width: 300px;
     position: fixed;
-    top: 140px;
+    top: 150px;
 }
 
 .left-widgets {
-    left: 10px;
+    left: 20px;
 }
 
 .right-widgets {
-    right: 10px;
+    right: 20px;
 }
 
 /****** weather *******/
 #openweathermap-widget-22 {
     margin-top: 50px;
 }
+
+/****** Trading ********/
+.trades-widget {
+    width: 240px;
+    border-radius: 5px;
+    box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.375);
+    margin-left: auto;
+    margin-top: 10px;
+    position: relative;
+}
+
+.image-section {
+    width: 50px;
+}
+
+.trades-image-container {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 90px;
+    height: 90px;
+    z-index: 10;
+}
+
+.stat {
+    position: relative;
+}
+
+.trades-widget .stat::before {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 80%;
+    position: absolute;
+    top: -2px;
+    left: 10%;
+    background-color: red;
+}
+
+.trades-widget .footer {
+    height: 5px;
+    border-radius: 5px;
+}
+
+.trades-widget,
+.trades-widget .footer {
+    background-color: #131313;
+}
+
+
 
 /****** covid ********/
 .covid-widget {
@@ -181,7 +241,8 @@ h6 + p {
     border-radius: 5px;
 }
 
-.covid-widget, .covid-widget .footer {
+.covid-widget,
+.covid-widget .footer {
     background-color: #153a02;
 }
 
@@ -190,14 +251,15 @@ h6 + p {
 .football-widget {
     position: relative;
     margin-left: 5px;
-    margin-top: 60px;
+    margin-top: 35px;
     width: 225px;
     border-radius: 5px;
     box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.375);
 
 }
 
-.football-widget, .football-widget .footer {
+.football-widget,
+.football-widget .footer {
     background-color: #224c86;
 }
 
@@ -221,7 +283,7 @@ h6 + p {
     font-size: small;
 }
 
-th {
+.football-table-head {
     border-bottom: 2px solid black;
     background-image: linear-gradient(whitesmoke, whitesmoke, dodgerblue);
 }
@@ -230,30 +292,26 @@ th {
     position: fixed;
     top: 0;
     right: 0;
-    height: 90vh;
+    height: 75vh;
     width: 50vw;
 }
 
-.right-sidebar {
-        position: fixed;
-        right: 20px;
-        top: 150px;
+/**********************STOCKS USER PAGE*********************************/
+
+.stocks-center {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
 }
 
-/********************** Login Form + Sign Up Form **********************/
-form {
-    margin-left: 150px;
-    margin-right: 150px;
+#stocks-search-header {
+    text-align: center;
 }
 
-
-.form-login {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 30%;
+.stock-finder {
+    width: 300px;
+    flex-direction: column
 }
-
 
 .stocks-list-center {
     margin-top: 15px;
@@ -286,10 +344,21 @@ form {
     color: red;
 }
 
-.stocks-widget {
-    font-size: 10px;
-    width: 200px;
+/********************** Login Form + Sign Up Form **********************/
+form {
+    margin-left: 150px;
+    margin-right: 150px;
 }
+
+
+.form-login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+
 /*************Login menu*************/
 #login-popup {
     position: fixed;
@@ -325,7 +394,7 @@ form {
     cursor: pointer;
 }
 
-#login-popup > div {
+#login-popup>div {
     text-align: center;
     z-index: 3;
     position: relative;
@@ -383,6 +452,3 @@ form {
     height: 400px;
     background-position: center;
 }
-
-
-

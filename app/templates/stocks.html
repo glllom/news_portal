@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 {% endblock %}
 
-{% block news_container %}
+{% block content %}
 
 {% block breakingnews %}
 {% endblock %}
@@ -44,106 +44,163 @@
     </div>
 </div>
 
-<div class="stocks-list-center">
+<div class="stocks-center">
+    <div class="">
+        <h4 id="stocks-search-header">EXCHANGE RATES</h4>
+    </div>
+</div>
+
+<div style="text-align: center;" class="stocks-list-center">
     <div class="user_stocks">
         <table class="table table-dark">
             <thead class="table-head">
                 <tr>
-                    <th scope="col">SYMBOL</th>
+                    <th scope="col">CHF to EUR</th>
                     <th scope="col"></th>
-                    <th class="col">NAME</th>
+                    <th scope="col">EUR to ILS</th>
                     <th scope="col"></th>
-                    <th scope="col">OPENING</th>
+                    <th class="col">EUR to GBP</th>
                     <th scope="col"></th>
-                    <th scope="col">HIGH</th>
+                    <th scope="col">USD to ILS</th>
                     <th scope="col"></th>
-                    <th scope="col">LOW</th>
+                    <th scope="col">USD to EUR</th>
                     <th scope="col"></th>
-                    <th scope="col">PREVIOUS-CLOSING</th>
+                    <th scope="col">USD to CNY</th>
                     <th scope="col"></th>
-                    <th scope="col">CLOSING</th>
+                    <th scope="col">USD to JPY</th>
                     <th scope="col"></th>
-                    <th scope="col">CHANGE</th>
-                    <th scope="col"></th>
-                    <th scope="col">PERCENTAGE CHANGE</th>
+                    <th scope="col">USD to AUD</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                <tr>
+                    <td scope="col">{{ eur_ils['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td scope="col">{{ eur_ils['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td class="col">{{ eur_gbp['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td scope="col">{{ usd_ils['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td scope="col">{{ usd_eur['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td scope="col">{{ usd_cny['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td scope="col">{{ usd_jpy['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td scope="col">{{ usd_aud['exchange_rate'] }}</td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
+                    <td scope="col"></td>
                 </tr>
             </thead>
-            <tbody>
-                {% for stock in user_stocks %}
-                <tr>
-                    <td>{{ stock.stock_symbol }}</td>
-                    <td scope="col"></td>
-                    <td>{{ stock.stock_name }}</td>
-                    <td scope="col"></td>
-                    {% if stock.change > 0 %}
-                    <td scope="col">{{ stock.opening }}</td>
-                    <td scope="col"></td>
-                    <td scope="col">{{ stock.high }}</td>
-                    <td scope="col"></td>
-                    <td scope="col">{{ stock.low }}</td>
-                    <td scope="col"></td>
-                    <td class="red-arrow" scope="col">{{ stock.previous_close }}</td>
-                    <td scope="col"></td>
-                    <td class="green-arrow" scope="col">{{ stock.closing }}</td>
-                    <td scope="col"></td>
-                    <td class="green-arrow" scope="col"><i class="fa-solid fa-arrow-trend-up"></i><span
-                            class="user-stocks"> {{ stock.change }}</span>
-                    </td>
-                    <td scope="col"></td>
-                    <td class="green-arrow" scope="col"><i class="fa-solid fa-arrow-trend-up"></i><span
-                            class="user-stocks"> {{ stock.perc }}</span>
-                    </td>
-                    <td scope="col"></td>
-                    {% else %}
-                    <td scope="col">{{ stock.opening }}</td>
-                    <td scope="col"></td>
-                    <td scope="col">{{ stock.high }}</td>
-                    <td scope="col"></td>
-                    <td scope="col">{{ stock.low }}</td>
-                    <td scope="col"></td>
-                    <td class="green-arrow" scope="col">{{ stock.previous_close }}</td>
-                    <td scope="col"></td>
-                    <td class="red-arrow" scope="col">{{ stock.closing }}</td>
-                    <td scope="col"></td>
-                    <td class="red-arrow" scope="col"><i class="fa-solid fa-arrow-trend-down"></i><span
-                            class="user-stocks"> {{ stock.change }}</span>
-                    </td>
-                    <td scope="col"></td>
-                    <td class="red-arrow" scope="col"><i class="fa-solid fa-arrow-trend-down"></i><span
-                            class="user-stocks"> {{ stock.perc }}</span>
-                    </td>
-                    <td scope="col"></td>
-                    {% endif %}
-                    <td><a class="delete-stock btn btn-danger" href="/stocks/{{ stock.id }}"
-                            style="margin-left: 20px;">Delete
-                            Stock</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
         </table>
-    </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
-</script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
-</script>
-<script>
-    $(function () {
-        var availableTags = [
-            {% for stock in stocks %}
+        <div class="stocks-list-center">
+            <div class="user_stocks">
+                <table class="table table-dark">
+                    <thead class="table-head">
+                        <tr>
+                            <th scope="col">SYMBOL</th>
+                            <th scope="col"></th>
+                            <th class="col">NAME</th>
+                            <th scope="col"></th>
+                            <th class="col">TRADING DATE</th>
+                            <th scope="col"></th>
+                            <th scope="col">OPENING</th>
+                            <th scope="col"></th>
+                            <th scope="col">HIGH</th>
+                            <th scope="col"></th>
+                            <th scope="col">LOW</th>
+                            <th scope="col"></th>
+                            <th scope="col">PREVIOUS-CLOSING</th>
+                            <th scope="col"></th>
+                            <th scope="col">CLOSING</th>
+                            <th scope="col"></th>
+                            <th scope="col">CHANGE</th>
+                            <th scope="col"></th>
+                            <th scope="col">PERCENTAGE CHANGE</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stock in user_stocks %}
+                        <tr>
+                            <td>{{ stock.stock_symbol }}</td>
+                            <td scope="col"></td>
+                            <td>{{ stock.stock_name }}</td>
+                            <td scope="col"></td>
+                            <td>{{ stock.date }}</td>
+                            <td scope="col"></td>
+                            {% if stock.change > 0 %}
+                            <td scope="col">{{ stock.opening }}</td>
+                            <td scope="col"></td>
+                            <td scope="col">{{ stock.high }}</td>
+                            <td scope="col"></td>
+                            <td scope="col">{{ stock.low }}</td>
+                            <td scope="col"></td>
+                            <td class="red-arrow" scope="col">{{ stock.previous_close }}</td>
+                            <td scope="col"></td>
+                            <td class="green-arrow" scope="col">{{ stock.closing }}</td>
+                            <td scope="col"></td>
+                            <td class="green-arrow" scope="col"><i class="fa-solid fa-arrow-trend-up"></i><span
+                                    class="user-stocks"> {{ stock.change }}</span>
+                            </td>
+                            <td scope="col"></td>
+                            <td class="green-arrow" scope="col"><i class="fa-solid fa-arrow-trend-up"></i><span
+                                    class="user-stocks"> {{ stock.perc }}</span>
+                            </td>
+                            <td scope="col"></td>
+                            {% else %}
+                            <td scope="col">{{ stock.opening }}</td>
+                            <td scope="col"></td>
+                            <td scope="col">{{ stock.high }}</td>
+                            <td scope="col"></td>
+                            <td scope="col">{{ stock.low }}</td>
+                            <td scope="col"></td>
+                            <td class="green-arrow" scope="col">{{ stock.previous_close }}</td>
+                            <td scope="col"></td>
+                            <td class="red-arrow" scope="col">{{ stock.closing }}</td>
+                            <td scope="col"></td>
+                            <td class="red-arrow" scope="col"><i class="fa-solid fa-arrow-trend-down"></i><span
+                                    class="user-stocks"> {{ stock.change }}</span>
+                            </td>
+                            <td scope="col"></td>
+                            <td class="red-arrow" scope="col"><i class="fa-solid fa-arrow-trend-down"></i><span
+                                    class="user-stocks"> {{ stock.perc }}</span>
+                            </td>
+                            <td scope="col"></td>
+                            {% endif %}
+                            <td><a class="delete-stock btn btn-danger" href="/stocks/{{ stock.id }}"
+                                    style="margin-left: 20px;">Delete
+                                    Stock</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+        </script>
+        <script>
+            $(function () {
+                var availableTags = [
+                    {% for stock in stocks %}
                 "{{stock["symbol"]}}: {{ stock["name"]}}",
-        {% endfor %}
+                {% endfor %}
             ];
-    $("#tags").autocomplete({
-        source: availableTags
-    });
+            $("#tags").autocomplete({
+                source: availableTags
+            });
         } );
-</script>
+        </script>
 
 
-{% endblock %}
-{% block login%}
-{% endblock %}
+        {% endblock %}
+        {% block login%}
+        {% endblock %}
