@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from app import db
 
 
@@ -46,10 +48,12 @@ class UserData(db.Model):
     def get_country(self):
         return self.country
 
+
 class User_Stocks(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     stock_symbol = db.Column(db.String(25))
     stock_name = db.Column(db.String(25))
+    date = db.Column(db.String(25))
     opening = db.Column(db.Float)
     high = db.Column(db.Float)
     low = db.Column(db.Float)

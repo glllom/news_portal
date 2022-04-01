@@ -19,7 +19,7 @@ def check_password(email, password):
 
 
 def set_word(user, word):
-    UserData.query.get(user.user_id).set_search_word(word)
+    UserData.query.get(user.id).set_search_word(word)
 
 
 def get_word(user):
@@ -27,7 +27,7 @@ def get_word(user):
 
 
 def update_user(user, firstname, lastname, country, city, language):
-    user = UserData.query.get(user.user_id)
+    user = UserData.query.get(user.id)
     user.set_firstname(firstname)
     user.set_lastname(lastname)
     user.set_country(country)
@@ -36,9 +36,10 @@ def update_user(user, firstname, lastname, country, city, language):
 
 
 """ -------------------------------USER STOCKS------------------------------- """
-def add_stock(stock_symbol, stock_name, opening, high, low, previous_close, closing, change, perc, user_id):
+def add_stock(stock_symbol, stock_name, date, opening, high, low, previous_close, closing, change, perc, user_id):
+                
+    new_stock = User_Stocks(stock_symbol=stock_symbol, stock_name=stock_name, date=date, opening=opening, high=high, low=low, previous_close=previous_close, closing=closing, change=change, perc=perc, user_id=user_id)
     
-    new_stock = User_Stocks(stock_symbol=stock_symbol, stock_name=stock_name, opening=opening, high=high, low=low, previous_close=previous_close, closing=closing, change=change, perc=perc, user_id=user_id)
     
     db.session.add(new_stock)
     db.session.commit()
@@ -47,5 +48,5 @@ def remove_stock(stock):
     db.session.delete(stock)
     db.session.commit()
 
-def user_stocks(user_id):
-    return db.session.query(User_Stocks).filter(User_Stocks.user_id == user_id)
+def user_stocks(id):
+    return db.session.query(User_Stocks).filter(User_Stocks.user_id == id)
