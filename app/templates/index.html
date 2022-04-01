@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="left-widgets">
-    <!-- WEATHER WIDGET -->
-    <div id="openweathermap-widget-12"></div>
-    <a href="{{ url_for('football') }}">{% include "football_widget.html" %}</a>
-</div>
-<div class="right-widgets">
-    {% include "covid_widget.html" %}
-    {% include "stocks_widget.html" %}
-</div>
-<div class="content d-flex justify-content-between">
-    <div class="left-sidebar"></div>
-    <main class="main-news">
-        {% for article in data_dict['articles'] %}
-        <a href="{{ article.url }}">
-            <div class="news-block">
-                <div>
-                    <h3>{{ article.title }}</h3>
-                    <h6>{{ article.description }}</h6>
+    <div class="left-widgets">
+        <!-- WEATHER WIDGET -->
+        <div id="openweathermap-widget-12"></div>
+        <a href="{{ url_for('football') }}">{% include "football_widget.html" %}</a>
+    </div>
+    <div class="right-widgets">
+        {% include "covid_widget.html" %}
+        <a href="{{ url_for('stocks') }}">{% include "stocks_widget.html" %}</a>
+    </div>
+    <div class="content d-flex justify-content-between">
+        <div class="left-sidebar"></div>
+        <main class="main-news">
+            {% for article in data_dict['articles'] %}
+                <a href="{{ article.url }}">
+                    <div class="news-block">
+                        <div>
+                            <h3>{{ article.title }}</h3>
+                            <h6>{{ article.description }}</h6>
                     <p>{{ article.content }}</p>
                     <p>{{ article.author }}</p>
                 </div>
