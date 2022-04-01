@@ -47,3 +47,5 @@ The same is done with the Football API which will show the information of the Is
 </p>
 
 ---
+
+<p>&copy Gleb Omarov and Ofir Russ 2022</p>
