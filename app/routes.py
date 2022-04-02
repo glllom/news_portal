@@ -8,7 +8,8 @@ from app.football import get_all_fixtures, get_main_games
 from app.models import User_Stocks
 from app.stocks_widget import currency_details, stock_details
 from app.forms import RegistrationForm, LoginForm, UpdateInfo
-from app.user_data import add_stock, add_user, check_user, check_password, remove_stock, set_word, get_word, update_user, user_stocks
+from app.user_data import add_stock, add_user, check_user, check_password, remove_stock, set_word, get_word, \
+    update_user, user_stocks
 
 logged_user = None
 football_fixtures = None  # It is global for decrease requests to API, because free key is limited requests
@@ -37,7 +38,8 @@ def index(word=''):
         football_fixtures = get_all_fixtures("Israel")
     main_games = get_main_games(football_fixtures)
     return render_template('index.html', data_dict=data_dict, login_form=login_form, logged_user=logged_user,
-                           weather_city_id=weather_city_id, covid_stat=covid_stat, football_fixtures=main_games, djd=djd, dax=dax, eur_ils=eur_ils, usd_ils=usd_ils)
+                           weather_city_id=weather_city_id, covid_stat=covid_stat, football_fixtures=main_games,
+                           djd=djd, dax=dax, eur_ils=eur_ils, usd_ils=usd_ils)
 
 
 @app.route('/stocks')
@@ -54,27 +56,31 @@ def stocks():
         usd_jpy = currency_details('USD', 'JPY')
         usd_aud = currency_details('USD', 'AUD')
         with open('all_stocks_list.json', 'r') as f:
-                stocks_list = json.load(f)
-        return render_template("stocks.html", stocks=stocks_list, user_stocks=personal_stocks, chf_eur=chf_eur, eur_ils=eur_ils, eur_gbp=eur_gbp, usd_ils=usd_ils, usd_eur=usd_eur, usd_cny=usd_cny, usd_jpy=usd_jpy, usd_aud=usd_aud)
+            stocks_list = json.load(f)
+        return render_template("stocks.html", stocks=stocks_list, user_stocks=personal_stocks, chf_eur=chf_eur,
+                               eur_ils=eur_ils, eur_gbp=eur_gbp, usd_ils=usd_ils, usd_eur=usd_eur, usd_cny=usd_cny,
+                               usd_jpy=usd_jpy, usd_aud=usd_aud)
     else:
         return redirect(url_for('index'))
-    
+
 
 @app.route('/stock_search', methods=['post'])
 def stock_search():
-        stock = request.form.get("search_stock")
-        stock_symbol = stock.split(':')[0]
-        stock_name = stock.split(':')[-1]
-        stock = stock_details(stock_symbol)
-        add_stock(stock_symbol, stock_name, stock['date'], stock['opening'], stock['high'], stock['low'], stock['previous_close'], stock['closing'], stock['change'], stock['perc'], logged_user.id)
+    stock = request.form.get("search_stock")
+    stock_symbol = stock.split(':')[0]
+    stock_name = stock.split(':')[-1]
+    stock = stock_details(stock_symbol)
+    add_stock(stock_symbol, stock_name, stock['date'], stock['opening'], stock['high'], stock['low'],
+              stock['previous_close'], stock['closing'], stock['change'], stock['perc'], logged_user.id)
 
-        return redirect(url_for("stocks"))
+    return redirect(url_for("stocks"))
+
 
 @app.route('/stocks/<int:stock_id>')
 def permanently_remove(stock_id):
-        delete_stock = User_Stocks.query.filter_by(id=stock_id).first()
-        remove_stock(delete_stock)
-        return redirect(url_for('stocks'))
+    delete_stock = User_Stocks.query.filter_by(id=stock_id).first()
+    remove_stock(delete_stock)
+    return redirect(url_for('stocks'))
 
 
 @app.route('/specified', methods=['post'])

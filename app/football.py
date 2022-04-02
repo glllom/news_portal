@@ -14,6 +14,7 @@ def get_football_leagues(country):
     querystring = {"country": country, "current": "true"}
     return requests.request("GET", url, headers=headers, params=querystring).json()['response']
 
+
 def get_date_format(timestamp):
     date_time_obj = datetime.datetime.fromtimestamp(timestamp)
     return f"{date_time_obj.day}/{date_time_obj.month}/{date_time_obj.year}"
@@ -52,7 +53,7 @@ def default_league():
         ]
         all_fixtures.append(league_dict)
         return all_fixtures
-default = default_league()
+
 
 def get_all_fixtures(country):
     all_fixtures = []
@@ -62,8 +63,8 @@ def get_all_fixtures(country):
             league_dict = {'league': league["league"]["name"], 'league_logo': league["league"]["logo"]}
             league_id = league['league']['id']
             query_fixtures = {"league": league_id, "season": int(datetime.date.today().year) - 1,
-                            "from": dt.today().strftime('%Y-%m-%d'),
-                            "to": (dt.today() + datetime.timedelta(days=2)).strftime('%Y-%m-%d')}
+                              "from": dt.today().strftime('%Y-%m-%d'),
+                              "to": (dt.today() + datetime.timedelta(days=2)).strftime('%Y-%m-%d')}
             response = requests.request("GET", url_fixtures, headers=headers, params=query_fixtures).json()['response']
             league_dict['fixtures'] = [
                 {
@@ -84,6 +85,4 @@ def get_all_fixtures(country):
             return get_all_fixtures("Israel")
         return all_fixtures
     except KeyError:
-        return default
-
-
+        return default_league()
