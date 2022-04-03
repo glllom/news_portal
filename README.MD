@@ -1,4 +1,4 @@
-<h1 align="center">THE "<span>- GO</span>" NEWS</h1>
+- <h1 align="center">THE "<span>GO</span>" NEWS</h1>
 
 <p style="font-size:18px">The GO news name came from our first names initials: </p>
 <ul style="font-weight: bold;">
