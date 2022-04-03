@@ -1,4 +1,4 @@
-<h1 align="center">THE "<span>- GO</span>" NEWS</h1>
+<h1 align="center">THE "<span>GO</span>" NEWS</h1>
 
 <p style="font-size:18px">The GO news name came from our first names initials: </p>
 <ul style="font-weight: bold;">
@@ -45,7 +45,7 @@ Users can also go to their personal dashboard, to see their profile information 
 ---
 
 ### Important:
-<p>- Because of our use of a "FREE KEY" for all of the API's, we needed to make sure we are avoiding errors.
+<p>Because of our use of a "FREE KEY" for all of the API's, we needed to make sure we are avoiding errors.
 <br>
 To do so, when having more than 5 requests from the Stocks API a default message of "API timeout" will show instead of the relevant information, this is due to a maximum of 5 requests per minute when using the "FREE KEY".
 <br>
